@@ -59,6 +59,13 @@ WORKDIR /var/www/html
 # Instalar dependencias PHP con Composer
 RUN composer install --no-dev --optimize-autoloader
 
+# Limpiar cachés de Laravel
+RUN php artisan route:clear && \
+    php artisan config:clear && \
+    php artisan cache:clear && \
+    php artisan view:clear
+
+
 # Instalar dependencias Node.js y construir frontend
 RUN npm install && npm run build
 
