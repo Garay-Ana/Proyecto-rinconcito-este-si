@@ -117,3 +117,20 @@ Route::middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])->group(
 require __DIR__.'/auth.php';
 
 require __DIR__.'/web_additional.php';
+
+Route::get('/ver-log', function () {
+    $logFile = storage_path('logs/laravel.log');
+    if (!file_exists($logFile)) {
+        return 'Log file not found.';
+    }
+    // Muestra las últimas 80 líneas
+    $lines = [];
+    $f = fopen($logFile, 'r');
+    while(!feof($f)){
+        $lines[] = fgets($f);
+    }
+    fclose($f);
+    $tail = array_slice($lines, -80); // cambia el número si quieres más/menos líneas
+    return '<pre>' . htmlspecialchars(implode('', $tail)) . '</pre>';
+});
+
