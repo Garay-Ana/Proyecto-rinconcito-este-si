@@ -56,6 +56,11 @@ RUN echo 'DocumentRoot /var/www/html/public' > /etc/apache2/conf-available/docum
 # Establecer directorio de trabajo
 WORKDIR /var/www/html
 
+# Crear carpetas necesarias de storage (si no existen)
+RUN mkdir -p /var/www/html/storage/framework/views \
+    && mkdir -p /var/www/html/storage/framework/cache \
+    && mkdir -p /var/www/html/storage/framework/sessions
+
 # Instalar dependencias PHP con Composer
 RUN composer install --no-dev --optimize-autoloader
 
@@ -65,12 +70,12 @@ RUN php artisan route:clear && \
     php artisan cache:clear && \
     php artisan view:clear
 
-
 # Instalar dependencias Node.js y construir frontend
 RUN npm install && npm run build
 
 # Cambiar permisos para almacenamiento y cache
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Exponer puerto 80
 EXPOSE 80
