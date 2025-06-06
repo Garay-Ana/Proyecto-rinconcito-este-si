@@ -1,4 +1,7 @@
 <x-guest-layout>
+    @php
+    $errors = $errors ?? new \Illuminate\Support\MessageBag;
+@endphp
 
 <!-- Logo personalizado -->
     <div class="text-center mb-4">
