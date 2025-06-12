@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Reporte Financiero y de Consumo</title>
+    <title>Reporte Financiero</title>
     <style>
         body {
             font-family: DejaVu Sans, sans-serif;
