@@ -3,10 +3,10 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const { Sequelize, DataTypes } = require('sequelize');
 
-// Configuración de la base de datos (ajustar según entorno)
-const sequelize = new Sequelize('database_name', 'username', 'password', {
-  host: 'localhost',
+const sequelize = new Sequelize('brtfk1tfrgstxpixn0c3', 'uwhbwnuy5gibnqrh', 'T4MhdRbT2WbYwT550Obu', {
+  host: 'brtfk1tfrgstxpixn0c3-mysql.services.clever-cloud.com',
   dialect: 'mysql',
+  port: 3306,
   logging: false,
 });
 
